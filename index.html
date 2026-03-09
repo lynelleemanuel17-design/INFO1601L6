@@ -3,7 +3,7 @@
   <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title>Demo</title>
+    <title>Ajax Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
@@ -30,6 +30,7 @@
      </main>
 
      <script>
+       // Function to render the table
        function drawTable(records) {
            const result = document.querySelector('#result');
            let html = '';
@@ -46,13 +47,19 @@
            result.innerHTML = html;
        }
 
-       // Test the function with sample data
-       drawTable([{
-          id: 1,
-          name: "bob's",
-          brewery_type: "fire",
-          website_url: "https://bobs.com"
-       }]);
+       // Async function to fetch data
+       async function getData(url) {
+           try {
+               const response = await fetch(url);         // 1. Send HTTP request
+               const result = await response.json();      // 2. Convert response to JSON
+               drawTable(result);                          // 3. Pass data to drawTable
+           } catch(e) {
+               console.log("Error fetching data:", e);   // Catch and log any errors
+           }
+       }
+
+       // Call getData with the API URL
+       getData("https://api.openbrewerydb.org/breweries/search?query=harry");
      </script>
   </body>
 </html>
