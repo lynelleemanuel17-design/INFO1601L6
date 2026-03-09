@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Event Handlers Example</title>
+  <title>Window Object Demo</title>
 </head>
 
 <body>
 
-<h2>JavaScript Event Handler Demo</h2>
-
-<button onclick="alertFun()">Alert</button>
-<button onclick="confirmFun()">Confirm</button>
-<button onclick="promptFun()">Prompt</button>
+<h2>Check the Console for Output</h2>
+<button onclick="redirect('https://www.google.com')">Go to Google</button>
 
 <script>
-function alertFun(){
-  alert("Hello !");
+
+//get client data using navigator
+console.log(window.navigator.cookieEnabled);
+console.log(window.navigator.onLine);
+console.log(navigator.appVersion);
+console.log(navigator.userAgent);
+console.log(navigator.platform);
+
+//get window metadata using window
+console.log(window.location.href); // full URL
+console.log(window.location.protocol);
+console.log(window.location.hostname);
+
+function redirect(url){
+  window.location.assign(url); // redirects page
 }
 
-function confirmFun(){
-  let didConfirm = confirm("Are you sure about that?");
-  if(didConfirm){
-    alert("You confirmed :)");
-  }else{
-    alert("You did not confirm :(");
-  }
+window.onload = function(event){
+   console.log("Page has loaded");
 }
 
-function promptFun(){
-  let val = prompt("What is your name?");
-  alert(`You've entered: ${val}`);
-}
 </script>
 
 </body>
