@@ -1,36 +1,37 @@
-As shown in section 1, we can bind javascript functions to DOM events using onevent attributes such as onclick. The code below will call the function myFun() when the button is clicked. ie a click event occurs on the button.
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Listeners</title>
+</head>
 
-<input id="myBtn" type="button" onclick="myFun()" value="click me"/>
-However we can use the addEventListener() method on HTML elements to attach event handlers at runtime.
-
-Task 5
-Add the above code to the page then pass the mouse over the button and click the button several times.
+<body>
 
 <input id="myBtn" type="button" onclick="myFun()" value="click me"/>
 
 <script>
-  function myFun(){
-    alert("hello");  
-  }
+function myFun(){
+  alert("hello");  
+}
 
-  function myFun2(){
-    console.log("myFun2 called");
-  }
+function myFun2(){
+  console.log("myFun2 called");
+}
 
- //receives the event parameter from addEventListener high order function
-  function logEventType(event){
-    console.log(event.type);
-  }
+//receives the event parameter
+function logEventType(event){
+  console.log(event.type);
+}
 
-  let myBtn = document.querySelector("#myBtn");
+let myBtn = document.querySelector("#myBtn");
 
-  //attach myFun2 in addition to myFun to the click event of myBtn
-  myBtn.addEventListener("click", myFun2);
+//attach another click event
+myBtn.addEventListener("click", myFun2);
 
-  //There are other events such as mouseover and mouseout
-  
-  //Any callback passed to addeventListener receives an event object
-  myBtn.addEventListener("mouseover", logEventType);//logs 'mouseover'
-  myBtn.addEventListener("mouseout", logEventType);// logs 'mouseout'
- //these events will fire when the mouse pointer hovers/passes over the button
+//mouse events
+myBtn.addEventListener("mouseover", logEventType);
+myBtn.addEventListener("mouseout", logEventType);
+
 </script>
+
+</body>
+</html>
