@@ -1,36 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Window Object Demo</title>
+  <title>DOM Manipulation</title>
 </head>
 
 <body>
 
-<h2>Check the Console for Output</h2>
-<button onclick="redirect('https://www.google.com')">Go to Google</button>
+<span id="result">Original Text</span>
 
 <script>
-
-//get client data using navigator
-console.log(window.navigator.cookieEnabled);
-console.log(window.navigator.onLine);
-console.log(navigator.appVersion);
-console.log(navigator.userAgent);
-console.log(navigator.platform);
-
-//get window metadata using window
-console.log(window.location.href); // full URL
-console.log(window.location.protocol);
-console.log(window.location.hostname);
-
-function redirect(url){
-  window.location.assign(url); // redirects page
-}
-
-window.onload = function(event){
-   console.log("Page has loaded");
-}
-
+const result = document.querySelector('#result');
+result.innerHTML = '<h2>My Span</h2>';
+result.style.color = 'blue';
 </script>
 
 </body>
