@@ -13,22 +13,46 @@
            <a href="#!" class="brand-logo">Ajax Demo</a>
         </div>
     </nav>
+
     <main class="row" style="padding: 40px">
-         <table>
+         <table class="striped">
            <thead>
                 <tr>
                    <th>#</th>
-                   <th>name</th>
+                   <th>Name</th>
                    <th>Type</th>
-                   <th>website</th>
+                   <th>Website</th>
                 </tr>
-                </thead>
-                  <tbody id="result">
-                                                
-                  </tbody>
-           </table>
+           </thead>
+           <tbody id="result">
+           </tbody>
+         </table>
      </main>
+
      <script>
+       function drawTable(records) {
+           const result = document.querySelector('#result');
+           let html = '';
+
+           for (let record of records) {
+               html += `<tr>
+                   <td>${record.id}</td>
+                   <td>${record.name}</td>
+                   <td>${record.brewery_type}</td>
+                   <td><a href="${record.website_url}" target="_blank">${record.website_url}</a></td>
+               </tr>`;
+           }
+
+           result.innerHTML = html;
+       }
+
+       // Test the function with sample data
+       drawTable([{
+          id: 1,
+          name: "bob's",
+          brewery_type: "fire",
+          website_url: "https://bobs.com"
+       }]);
      </script>
   </body>
 </html>
