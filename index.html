@@ -1,36 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Event Listeners</title>
+  <title>Image Load Event</title>
 </head>
 
 <body>
 
-<input id="myBtn" type="button" onclick="myFun()" value="click me"/>
+<img id="myImage" src="https://www.placecage.com/200/300" alt="Nicholas Cage">
 
 <script>
-function myFun(){
-  alert("hello");  
+function loaded(){
+  console.log("img loaded");
 }
 
-function myFun2(){
-  console.log("myFun2 called");
-}
-
-//receives the event parameter
-function logEventType(event){
-  console.log(event.type);
-}
-
-let myBtn = document.querySelector("#myBtn");
-
-//attach another click event
-myBtn.addEventListener("click", myFun2);
-
-//mouse events
-myBtn.addEventListener("mouseover", logEventType);
-myBtn.addEventListener("mouseout", logEventType);
-
+let img = document.querySelector("#myImage");
+img.addEventListener("load", loaded);
 </script>
 
 </body>
