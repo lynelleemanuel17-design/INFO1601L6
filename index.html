@@ -25,6 +25,7 @@
                 </tr>
            </thead>
            <tbody id="result">
+             <tr><td colspan="4">Loading data...</td></tr>
            </tbody>
          </table>
      </main>
@@ -37,29 +38,31 @@
 
            for (let record of records) {
                html += `<tr>
-                   <td>${record.id}</td>
-                   <td>${record.name}</td>
-                   <td>${record.brewery_type}</td>
-                   <td><a href="${record.website_url}" target="_blank">${record.website_url}</a></td>
+                   <td>${record.id || ''}</td>
+                   <td>${record.name || ''}</td>
+                   <td>${record.brewery_type || ''}</td>
+                   <td>${record.website_url ? `<a href="${record.website_url}" target="_blank">${record.website_url}</a>` : ''}</td>
                </tr>`;
            }
 
-           result.innerHTML = html;
+           result.innerHTML = html || '<tr><td colspan="4">No data available</td></tr>';
        }
 
        // Async function to fetch data
        async function getData(url) {
            try {
-               const response = await fetch(url);         // 1. Send HTTP request
-               const result = await response.json();      // 2. Convert response to JSON
-               drawTable(result);                          // 3. Pass data to drawTable
+               const response = await fetch(url);
+               const result = await response.json();
+               drawTable(result);
            } catch(e) {
-               console.log("Error fetching data:", e);   // Catch and log any errors
+               console.log("Error fetching data:", e);
+               document.querySelector('#result').innerHTML = 
+                 '<tr><td colspan="4">Failed to load data</td></tr>';
            }
        }
 
-       // Call getData with the API URL
-       getData("https://api.openbrewerydb.org/breweries/search?query=harry");
+       // Fetch 10 breweries from the API
+       getData("https://api.openbrewerydb.org/breweries?per_page=10");
      </script>
   </body>
 </html>
