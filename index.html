@@ -25,44 +25,44 @@
                 </tr>
            </thead>
            <tbody id="result">
-             <tr><td colspan="4">Loading data...</td></tr>
+              <tr><td colspan="4">Loading...</td></tr>
            </tbody>
          </table>
      </main>
 
      <script>
-       // Function to render the table
-       function drawTable(records) {
-           const result = document.querySelector('#result');
-           let html = '';
+     function drawTable(records){
+        let result = document.querySelector('#result');
+        let html = '';
 
-           for (let record of records) {
-               html += `<tr>
-                   <td>${record.id || ''}</td>
-                   <td>${record.name || ''}</td>
-                   <td>${record.brewery_type || ''}</td>
-                   <td>${record.website_url ? `<a href="${record.website_url}" target="_blank">${record.website_url}</a>` : ''}</td>
-               </tr>`;
-           }
+        for(let record of records){
+            html += `<tr>
+              <td>${record.id}</td>
+              <td>${record.name}</td>
+              <td>${record.brewery_type}</td>
+              <td>
+                ${record.website_url ? `<a href="${record.website_url}" target="_blank">${record.website_url}</a>` : 'N/A'}
+              </td>
+            </tr>`;
+        }
 
-           result.innerHTML = html || '<tr><td colspan="4">No data available</td></tr>';
-       }
+        result.innerHTML = html;
+     }
 
-       // Async function to fetch data
-       async function getData(url) {
-           try {
-               const response = await fetch(url);
-               const result = await response.json();
-               drawTable(result);
-           } catch(e) {
-               console.log("Error fetching data:", e);
-               document.querySelector('#result').innerHTML = 
-                 '<tr><td colspan="4">Failed to load data</td></tr>';
-           }
-       }
+     // async request function
+     async function getData(url){
+        try{
+            let response = await fetch(url);      // 1. send request
+            let result = await response.json();   // 2. get data
+            drawTable(result);                    // 3. render table
+        }catch(e){
+            console.log(e);
+        }
+     }
 
-       // Fetch 10 breweries from the API
-       getData("https://api.openbrewerydb.org/breweries?per_page=10");
+     // call API
+     getData("https://api.openbrewerydb.org/v1/breweries");
      </script>
+
   </body>
 </html>
